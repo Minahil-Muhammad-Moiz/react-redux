@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import viteLogo from '/vite.svg'
+import Header from './Components/header'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      Hello World
+      <Header/>
     </>
   )
 }
