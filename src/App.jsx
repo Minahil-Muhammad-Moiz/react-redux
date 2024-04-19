@@ -1,16 +1,17 @@
-import { useState } from 'react'
-
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from './Components/Header';
-
-
+import Header from './Components/header';
+import { Routes, Route} from 'react-router-dom';
+import CardDetails from './Components/CardDetails';
+import Cards from './Components/Cards';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <Header/>
+      <Routes>
+        <Route path='/' element={<Cards/>}/>
+        <Route path='CardDetails' element={<CardDetails/>}/>
+      </Routes>
     </>
   )
 }

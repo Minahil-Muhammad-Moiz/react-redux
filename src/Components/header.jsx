@@ -1,23 +1,61 @@
-import { ShoppingCart } from "@mui/icons-material";
-import  Badge  from "@mui/material/Badge";
+import { Cancel, ShoppingCart } from "@mui/icons-material";
+import Badge from "@mui/material/Badge";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { NavLink } from "react-router-dom";
+// import MenuItem from "@mui/material/MenuItem";
+import { Menu } from "@mui/material";
+import { useState } from "react";
 
 const Header = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="#home">Shop-Cart</Navbar.Brand>
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-          </Nav>
-          <Badge badgeContent={4} color="primary">
-            <ShoppingCart/>
-          </Badge>
-        </Navbar.Collapse>
+        <NavLink to="/" className="text-decoration-none text-dark m-3 ">
+          Shop-Cart
+        </NavLink>
+        <Nav className="me-auto">
+          <NavLink to="/" className="text-decoration-none">
+            Home
+          </NavLink>
+        </Nav>
+        <Badge
+          badgeContent={4}
+          color="primary"
+          id="basic-button"
+          aria-controls={open ? "basic-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleClick}
+        >
+          <ShoppingCart />
+        </Badge>
       </Container>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          "aria-labelledby": "basic-button",
+        }}
+      >
+        <div className="card-details">
+          <Cancel/>
+          <p>Card is Empty</p>
+        </div>
+      </Menu>
+      ;
     </Navbar>
   );
 };
