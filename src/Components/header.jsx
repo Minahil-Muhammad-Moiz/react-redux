@@ -67,7 +67,8 @@ const Header = () => {
             <tbody>
               {cartData.map((item)=>{
                 return(
-                  <tr>
+                  <tr>       
+                    <NavLink to={`/cart/${item.id}`}  onClick={handleClose}>
                     <td>
                       <img src={item.imgdata} style={{width:'5rem',  height:'5rem'}}/>
                     </td>
@@ -75,11 +76,12 @@ const Header = () => {
                       <p>{item.rname}</p>
                       <p>price: ₹ {item.price}</p>
                       <p>Quantity: ₹ {item.qnty}</p>
-                    </td>
+                    </td></NavLink>
                     <td><Delete/></td>
                   </tr>
                 )
               })}
+              <p>Total: ₹300</p>
             </tbody>
           </Table>
         </div> : "Card Empty"}

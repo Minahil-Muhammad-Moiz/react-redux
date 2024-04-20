@@ -10,7 +10,7 @@ function App() {
       <Header/>
       <Routes>
         <Route path='/' element={<Cards/>}/>
-        <Route path='CardDetails' element={<CardDetails/>}/>
+        <Route path='/cart/:id' element={<CardDetails/>}/>
       </Routes>
     </>
   )
