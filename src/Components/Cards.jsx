@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Cardsdata from "./CardsData";
-
+import { useDispatch } from "react-redux";
+import {ADD} from './redux/actions/Action' 
 const Cards = () => {
   const [data, setData] = useState(Cardsdata);
+
+  const dispatch = useDispatch()
+  const send= (card)=>{
+    dispatch(ADD(card))
+  }
 
   return (
     <div className="container mt-3 ">
@@ -22,9 +28,9 @@ const Cards = () => {
             />
             <Card.Body>
               <Card.Title>{card.rname}</Card.Title>
-              <Card.Text>price: {card.price} ₹</Card.Text>
+              <Card.Text>price: {card.price} `₹`</Card.Text>
               <div className="button_div ">
-                <Button variant="primary">Add To Cart</Button>
+                <Button variant="primary" onClick = {()=>send(card)}>Add To Cart</Button>
               </div>
             </Card.Body>
           </Card>
