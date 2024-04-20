@@ -1,4 +1,4 @@
-import { Cancel, ShoppingCart } from "@mui/icons-material";
+import { Cancel, Delete, Height, ShoppingCart } from "@mui/icons-material";
 import Badge from "@mui/material/Badge";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -7,8 +7,12 @@ import { NavLink } from "react-router-dom";
 // import MenuItem from "@mui/material/MenuItem";
 import { Menu } from "@mui/material";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { Table } from "react-bootstrap";
 
 const Header = () => {
+  const cartData = useSelector((state) => state.cartReducer.carts);
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -30,7 +34,7 @@ const Header = () => {
           </NavLink>
         </Nav>
         <Badge
-          badgeContent={4}
+          badgeContent={cartData.length}
           color="primary"
           id="basic-button"
           aria-controls={open ? "basic-menu" : undefined}
@@ -50,12 +54,36 @@ const Header = () => {
           "aria-labelledby": "basic-button",
         }}
       >
-        <div className="card-details">
-          <Cancel/>
-          <p>Card is Empty</p>
-        </div>
+        <Cancel />
+        {cartData.length ? <div className="card_details">
+          <Table>
+            <thead>
+              <tr>
+                <th>Items</th>
+                <th>Restraunt</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {cartData.map((item)=>{
+                return(
+                  <tr>
+                    <td>
+                      <img src={item.imgdata} style={{width:'5rem',  height:'5rem'}}/>
+                    </td>
+                    <td>
+                      <p>{item.rname}</p>
+                      <p>price: ₹ {item.price}</p>
+                      <p>Quantity: ₹ {item.qnty}</p>
+                    </td>
+                    <td><Delete/></td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </Table>
+        </div> : "Card Empty"}
       </Menu>
-      ;
     </Navbar>
   );
 };
