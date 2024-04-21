@@ -26,6 +26,7 @@ const CardDetails = () => {
     compare();
   }, [id]);
 
+  
   const dltItem = (id)=>{
     dispatch(RMV(id));
     navToHome('/')
@@ -67,6 +68,11 @@ const CardDetails = () => {
                             <strong>Total: ₹</strong>
                             {item.price}
                           </p>
+                          <div className="d-flex align-items-baseline">
+                            <button>-</button>
+                            <p>{item.qnty}</p>
+                            <button>+</button>
+                          </div>
                         </td>
                         <td>
                           <p>

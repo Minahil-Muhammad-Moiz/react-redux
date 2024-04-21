@@ -5,16 +5,25 @@ const InitialState = {
 export const cartReducer = (state = InitialState, action) => {
   switch (action.type) {
     case "AddToCart":
-      return {
-        ...state,
-        carts: [...state.carts, action.payload],
-      };
-    case 'DeleteItem':
-      const newData = state.carts.filter((i)=>i.id !== action.payload)
-      return {
-        ...state,
-        carts: newData
+      const prIndex = state.carts.findIndex(
+        (item) => item.id == action.payload.id
+      );
+      if (prIndex >= 0) {
+        state.carts[prIndex].qnty += 1;
+      } else {
+        const prQnty = { ...action.payload, qnty: 1 };
+        return {
+          ...state,
+          carts: [...state.carts, prQnty],
+        };
       }
+
+    case "DeleteItem":
+      const newData = state.carts.filter((i) => i.id !== action.payload);
+      return {
+        ...state,
+        carts: newData,
+      };
     default:
       return state;
   }

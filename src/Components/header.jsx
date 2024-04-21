@@ -98,7 +98,7 @@ const Header = () => {
                         <td>
                           <p>{item.rname}</p>
                           <p>price: ₹ {item.price}</p>
-                          <p>Quantity: ₹ {item.qnty}</p>
+                          <p>Quantity: {item.qnty}</p>
                         </td>
                       </NavLink>
                       <td
