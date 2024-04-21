@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { ADD, RMV } from "./redux/actions/Action";
+import { ADD, DEC_QNTY, RMV } from "./redux/actions/Action";
 
 const CardDetails = () => {
   const [data, setData] = useState([]);
@@ -35,6 +35,9 @@ const CardDetails = () => {
     navToHome('/')
   }
 
+  const decree = (card)=>{
+    dispatch(DEC_QNTY(card))
+  }
   
   return (
     <>
@@ -72,7 +75,7 @@ const CardDetails = () => {
                             {item.price}
                           </p>
                           <div className="d-flex align-items-baseline">
-                            <button>-</button>
+                            <button onClick={()=>{decree(item)}}>-</button>
                             <p>{item.qnty}</p>
                             <button onClick={()=>send(item)}>+</button>
                           </div>

@@ -24,6 +24,19 @@ export const cartReducer = (state = InitialState, action) => {
         ...state,
         carts: newData,
       };
+
+    case 'DecreaseQnty':
+      const decQ = state.carts.findIndex(
+        (item) => item.id == action.payload.id
+      );
+      if (state.carts[decQ].qnty>1){
+        const dltItem = state.carts[decQ].qnty -= 1
+        return{
+          ...state,
+          carts: [...state.carts ]
+        }
+      }
+
     default:
       return state;
   }

@@ -11,3 +11,10 @@ export const RMV =(id)=>{
         payload: id
     }
 }
+
+export const DEC_QNTY =(item)=>{
+    return{
+        type: 'DecreaseQnty',
+        payload: item
+    }
+}
