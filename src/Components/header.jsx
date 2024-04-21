@@ -7,11 +7,13 @@ import { NavLink } from "react-router-dom";
 // import MenuItem from "@mui/material/MenuItem";
 import { Menu } from "@mui/material";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Table } from "react-bootstrap";
+import { RMV } from "./redux/actions/Action";
 
 const Header = () => {
   const cartData = useSelector((state) => state.cartReducer.carts);
+  const dispatch = useDispatch();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -20,6 +22,10 @@ const Header = () => {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const dltItem = (id) => {
+    dispatch(RMV(id));
   };
 
   return (
@@ -54,37 +60,57 @@ const Header = () => {
           "aria-labelledby": "basic-button",
         }}
       >
-        <Cancel />
-        {cartData.length ? <div className="card_details">
-          <Table>
-            <thead>
-              <tr>
-                <th>Items</th>
-                <th>Restraunt</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {cartData.map((item)=>{
-                return(
-                  <tr>       
-                    <NavLink to={`/cart/${item.id}`}  onClick={handleClose}>
-                    <td>
-                      <img src={item.imgdata} style={{width:'5rem',  height:'5rem'}}/>
-                    </td>
-                    <td>
-                      <p>{item.rname}</p>
-                      <p>price: ₹ {item.price}</p>
-                      <p>Quantity: ₹ {item.qnty}</p>
-                    </td></NavLink>
-                    <td><Delete/></td>
-                  </tr>
-                )
-              })}
-              <p>Total: ₹300</p>
-            </tbody>
-          </Table>
-        </div> : "Card Empty"}
+        <Cancel onClick={handleClose} />
+        {cartData.length ? (
+          <div className="card_details">
+            <Table>
+              <thead>
+                <tr>
+                  <th>Items</th>
+                  <th>Restraunt</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {cartData.map((item) => {
+                  return (
+                    <tr>
+                      <NavLink to={`/cart/${item.id}`} onClick={handleClose}>
+                        <td>
+                          <img
+                            src={item.imgdata}
+                            style={{ width: "5rem", height: "5rem" }}
+                          />
+                        </td>
+                        <td>
+                          <p>{item.rname}</p>
+                          <p>price: ₹ {item.price}</p>
+                          <p>Quantity: ₹ {item.qnty}</p>
+                        </td>
+                      </NavLink>
+                      <td
+                        onClick={() => {
+                          dltItem(item.id);
+                        }}
+                      >
+                        <Delete style={{ color: "red", cursor: "pointer" }} />
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td>
+                    <p>Total: ₹300</p>
+                  </td>
+                </tr>
+              </tfoot>
+            </Table>
+          </div>
+        ) : (
+          "Card Empty"
+        )}
       </Menu>
     </Navbar>
   );

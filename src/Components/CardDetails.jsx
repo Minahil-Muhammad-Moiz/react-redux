@@ -9,11 +9,13 @@ const CardDetails = () => {
 
   const cartData = useSelector((state) => state.cartReducer.carts);
   const { id } = useParams();
+  // console.log(cartData);
 
   const compare = () => {
-    let filteredData = cartData.filter((e) => {
-      return e.id == id;
-    });
+    let filteredData = 
+    cartData.filter((e) => {
+      return e.id == id}
+    );
     setData(filteredData);
   };
 
@@ -31,23 +33,30 @@ const CardDetails = () => {
               return (
                 <>
                   <div className="items_img">
-                    <img src={item.imgdata} style={{width:'20rem', height: '20rem'}} />
+                    <img
+                      src={item.imgdata}
+                      style={{ width: "20rem", height: "20rem" }}
+                    />
                   </div>
                   <div className="details">
                     <Table>
                       <tr>
                         <td>
                           <p>
-                            <strong>Restaurant: </strong>{item.rname}
+                            <strong>Restaurant: </strong>
+                            {item.rname}
                           </p>
                           <p>
-                            <strong>price: ₹ </strong>{item.price}
+                            <strong>price: ₹ </strong>
+                            {item.price}
                           </p>
                           <p>
-                            <strong>Dish: </strong>{item.address}
+                            <strong>Dish: </strong>
+                            {item.address}
                           </p>
                           <p>
-                            <strong>Total: ₹</strong>{item.price}
+                            <strong>Total: ₹</strong>
+                            {item.price}
                           </p>
                         </td>
                         <td>
@@ -55,7 +64,8 @@ const CardDetails = () => {
                             <strong>Rating: </strong> {item.rating}
                           </p>
                           <p>
-                            <strong>Order Review: </strong>{item.somedata}
+                            <strong>Order Review: </strong>
+                            {item.somedata}
                           </p>
                           <p>
                             <strong>Remove: </strong>

@@ -4,3 +4,10 @@ export const ADD =(item)=>{
         payload: item
     }
 }
+
+export const RMV =(id)=>{
+    return{
+        type: 'DeleteItem',
+        payload: id
+    }
+}
