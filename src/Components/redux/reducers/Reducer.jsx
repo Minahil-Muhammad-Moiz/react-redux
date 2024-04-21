@@ -29,7 +29,7 @@ export const cartReducer = (state = InitialState, action) => {
       const decQ = state.carts.findIndex(
         (item) => item.id == action.payload.id
       );
-      if (state.carts[decQ].qnty>1){
+      if (state.carts[decQ].qnty>=1){
         const dltItem = state.carts[decQ].qnty -= 1
         return{
           ...state,

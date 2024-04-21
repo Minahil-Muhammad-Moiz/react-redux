@@ -75,7 +75,7 @@ const CardDetails = () => {
                             {item.price}
                           </p>
                           <div className="d-flex align-items-baseline">
-                            <button onClick={()=>{decree(item)}}>-</button>
+                            <button onClick={(item.qnty <=1 )? ()=>{dltItem(item.id)}: ()=>{decree(item)}}>-</button>
                             <p>{item.qnty}</p>
                             <button onClick={()=>send(item)}>+</button>
                           </div>
