@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { RMV } from "./redux/actions/Action";
+import { ADD, RMV } from "./redux/actions/Action";
 
 const CardDetails = () => {
   const [data, setData] = useState([]);
@@ -26,7 +26,10 @@ const CardDetails = () => {
     compare();
   }, [id]);
 
-  
+  const send= (card)=>{
+    dispatch(ADD(card))
+  }
+
   const dltItem = (id)=>{
     dispatch(RMV(id));
     navToHome('/')
@@ -71,7 +74,7 @@ const CardDetails = () => {
                           <div className="d-flex align-items-baseline">
                             <button>-</button>
                             <p>{item.qnty}</p>
-                            <button>+</button>
+                            <button onClick={()=>send(item)}>+</button>
                           </div>
                         </td>
                         <td>
