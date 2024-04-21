@@ -1,15 +1,19 @@
 import { Delete } from "@mui/icons-material";
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { RMV } from "./redux/actions/Action";
 
 const CardDetails = () => {
   const [data, setData] = useState([]);
+  
+  const dispatch = useDispatch()
 
   const cartData = useSelector((state) => state.cartReducer.carts);
   const { id } = useParams();
-  // console.log(cartData);
+
+  const navToHome = useNavigate()
 
   const compare = () => {
     let filteredData = 
@@ -18,11 +22,16 @@ const CardDetails = () => {
     );
     setData(filteredData);
   };
-
   useEffect(() => {
     compare();
   }, [id]);
-  // console.log(data);
+
+  const dltItem = (id)=>{
+    dispatch(RMV(id));
+    navToHome('/')
+  }
+
+  
   return (
     <>
       <div className="container mt-2">
@@ -69,7 +78,7 @@ const CardDetails = () => {
                           </p>
                           <p>
                             <strong>Remove: </strong>
-                            <Delete style={{ color: "red" }} />
+                            <Delete style={{ color: "red", cursor: 'pointer' }} onClick={()=>dltItem(item.id)}/>
                           </p>
                         </td>
                       </tr>
