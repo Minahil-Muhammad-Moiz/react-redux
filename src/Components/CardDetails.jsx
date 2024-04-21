@@ -72,7 +72,7 @@ const CardDetails = () => {
                           </p>
                           <p>
                             <strong>Total: ₹</strong>
-                            {item.price}
+                            {item.price * item.qnty}
                           </p>
                           <div className="d-flex align-items-baseline">
                             <button onClick={(item.qnty <=1 )? ()=>{dltItem(item.id)}: ()=>{decree(item)}}>-</button>
