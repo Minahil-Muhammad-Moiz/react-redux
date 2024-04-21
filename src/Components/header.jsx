@@ -33,7 +33,7 @@ const Header = () => {
   const total = () => {
     let totalPrice = 0; // Use a different variable name for the accumulator
     cartData.map((item) => {
-      totalPrice += item.price; // Accumulate the price of each item
+      totalPrice += item.price* item.qnty; // Accumulate the price of each item
     });
     setPrice(totalPrice); // Update the state with the total price
   };
